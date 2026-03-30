@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive DSA Visualizer Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./visualizer-platform/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- LEFT: SIDEBAR (fixed, 280px) -->
+    <aside class="panel sidebar">
+      <h1 class="app-title">DSA Visualizer</h1>
+      <input id="algorithmSearch" class="search-box" type="text" placeholder="Search algorithm..." />
+      <div id="algorithmList" class="algorithm-list"></div>
+    </aside>
+
+    <!-- CENTER: MAIN VISUALIZATION AREA (70-80%) -->
+    <div class="center-column">
+      <!-- TOP: TITLE + METADATA -->
+      <section class="topbar">
+        <div class="algorithm-meta">
+          <h2 id="algorithmTitle"></h2>
+          <p id="algorithmDescription"></p>
+        </div>
+        <div class="meta-strip">
+          <span id="timelineCounter" class="pill">Step 0 / 0</span>
+          <span id="xpText" class="pill">XP: 0</span>
+          <button id="themeToggle" class="btn-soft" title="Toggle light/dark mode">🌓</button>
+        </div>
+      </section>
+
+      <!-- CONTROLS + SCRUBBER -->
+      <div class="control-box">
+        <div class="control-row">
+          <button id="playButton" class="btn-solid" title="Play (Space)">▶</button>
+          <button id="pauseButton" class="btn-soft" title="Pause (Space)">⏸</button>
+          <button id="backButton" class="btn-soft" title="Back (←)">←</button>
+          <button id="forwardButton" class="btn-soft" title="Forward (→)">→</button>
+          <button id="resetButton" class="btn-soft" title="Reset (R)">↻</button>
+          <div class="speed-control">
+            <input id="speedControl" type="range" min="120" max="1600" step="20" value="600" title="Animation speed" />
+            <span id="speedLabel" class="speed-label">0.6s</span>
+          </div>
+        </div>
+        <div class="scrubber-row">
+          <input id="timelineScrubber" type="range" min="0" max="0" step="1" value="0" title="Drag to jump to step" />
+          <span id="scrubberLabel" class="scrubber-label">Step 1</span>
+        </div>
+      </div>
+
+      <!-- VISUALIZATION (main focus) -->
+      <div class="visual-container">
+        <div id="visualStage" class="visual-stage"></div>
+      </div>
+
+      <!-- CODE PANEL (below visualization) -->
+      <div class="code-container">
+        <div id="codePanel" class="code-panel"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: COMPACT INFO PANEL (280px) -->
+    <aside class="panel info-panel">
+      <!-- STEP NARRATIVE -->
+      <div class="info-section">
+        <h3 class="section-title">Step Info</h3>
+        <p id="stepCaption" class="step-caption"></p>
+        <p id="whyPanel" class="why-text"></p>
+      </div>
+
+      <!-- COMPACT TRACKER (inline badges) -->
+      <div class="info-section">
+        <h3 class="section-title">State</h3>
+        <div id="trackerPanel" class="compact-tracker"></div>
+      </div>
+
+      <!-- INPUT PANEL (collapsible) -->
+      <details class="info-section collapsible">
+        <summary class="section-title">Input</summary>
+        <div id="templateControls" class="template-controls">
+          <select id="srcTemplateSelect" title="Pick a template"></select>
+          <button id="loadTemplateButton" class="btn-soft" title="Load template">Load</button>
+        </div>
+        <div id="inputPanel" class="input-list"></div>
+      </details>
+
+      <!-- JUDGE0 PANEL (collapsible) -->
+      <details class="info-section collapsible">
+        <summary class="section-title">Judge0</summary>
+        <div id="judge0Panel"></div>
+      </details>
+
+      <!-- ACHIEVEMENTS -->
+      <div class="info-section">
+        <p id="achievementText" class="achievement-text"></p>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module" src="./visualizer-platform/main.js"></script>
+</body>
+</html>
